@@ -6,14 +6,26 @@
 // @version        1.0
 // ==/UserScript==
 
+
+/**
+ * Refreshes the skillpane
+ **/
 function showSkills() {
 	skillpane.location.href = 'skills.php?tiny=1';
 }
+
+/**
+ * Checks if either the menu or the skillpane is not visible
+ **/
 function checkVisible(){
 	if (document.querySelector('#skillbit').style.display != "inline-block" || document.querySelector('#menus').style.display != "inline-block"){
 		showSkills();
 	}
 }
+
+/**
+ * Sets up the menupane
+ **/
 function initMenu () {
 	document.body.innerHTML += '<style>'+
 		'#menus, #skillpane { width: 350px; vertical-align: middle; }' +
@@ -28,6 +40,10 @@ function initMenu () {
 	loading.style.width = '50px';
 	el.nextSibling.nextSibling.appendChild(loading);
 }
+
+/**
+ * Sets up the skillpane
+ **/
 function initSkills(){
 	parent.document.querySelector('#skillbit').style.display = 'inline-block';
 	parent.document.querySelector('#menus').style.display = 'inline-block';
@@ -35,6 +51,9 @@ function initSkills(){
 	div.innerHTML = '<style>select {width:250px;}.tinybutton { padding-bottom: 2px }</style>';
 	document.body.appendChild(div);
 }
+
+
+
 if (window.location.href.indexOf('topmenu.php') > 1){
 	initMenu();
 	showSkills();
