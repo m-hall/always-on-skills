@@ -6,7 +6,6 @@
 // @version        1.0
 // ==/UserScript==
 
-
 /**
  * Refreshes the skillpane
  **/
@@ -15,20 +14,11 @@ function showSkills() {
 }
 
 /**
- * Checks if either the menu or the skillpane is not visible
- **/
-function checkVisible(){
-	if (document.querySelector('#skillbit').style.display != "inline-block" || document.querySelector('#menus').style.display != "inline-block"){
-		showSkills();
-	}
-}
-
-/**
  * Sets up the menupane
  **/
 function initMenu () {
 	document.body.innerHTML += '<style>'+
-		'#menus, #skillpane { width: 350px; vertical-align: middle; }' +
+		'#menus, #skillpane { width: 350px; vertical-align: middle; display: inline-block !important; }' +
 		'#yep > center > table{ width: 100% }' +
 	'</style>';
 	var el = document.querySelector('#yep > center > table > tbody > tr > td:first-child');
@@ -45,19 +35,14 @@ function initMenu () {
  * Sets up the skillpane
  **/
 function initSkills(){
-	parent.document.querySelector('#skillbit').style.display = 'inline-block';
-	parent.document.querySelector('#menus').style.display = 'inline-block';
 	var div = document.createElement('div');
 	div.innerHTML = '<style>select {width:250px;}.tinybutton { padding-bottom: 2px }</style>';
 	document.body.appendChild(div);
 }
 
-
-
-if (window.location.href.indexOf('topmenu.php') > 1){
+if (window.location.pathname == '/topmenu.php'){
 	initMenu();
 	showSkills();
-	setInterval(checkVisible,3000);
-}else if (window.location.href.indexOf('skills.php') > 1){
+}else if (window.location.pathname == '/skills.php'){
 	initSkills();
 }
